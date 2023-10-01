@@ -1,0 +1,11 @@
+body {
+  background-color: grey;
+}
+
+form {
+  background-color: aliceblue;
+  width: 300px;
+  padding: 13px;
+  display: flex;
+  flex-direction: column;
+}
