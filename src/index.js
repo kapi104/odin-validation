@@ -40,9 +40,9 @@ checkedInputs.forEach((i) => {
   i.addEventListener('focus', () => checkValidity(i));
 });
 
-const disabledValidationMessage = inputs.slice(0, -1);
+const allInputs = inputs.slice(0, -1);
 
-disabledValidationMessage.forEach((i) => {
+allInputs.forEach((i) => {
   i.addEventListener('invalid', (e) => {
     e.preventDefault();
   });
@@ -51,12 +51,19 @@ disabledValidationMessage.forEach((i) => {
 const rPass = document.querySelector('#rPassword');
 const pass = document.querySelector('#password');
 
-rPass.addEventListener('input', () => {
+const checkRPass = () => {
   const spanTxt = rPass.nextElementSibling;
   const inputClasslist = rPass.classList;
-  if (rPass.value === pass.value && !pass.validity.tooShort) {
+  if (
+    rPass.value === pass.value &&
+    !pass.validity.tooShort &&
+    !pass.validity.valueMissing
+  ) {
     spanTxt.innerText = '';
     inputClasslist.remove('error');
+  } else if (pass.validity.valueMissing) {
+    spanTxt.innerText = "Password can't be empty";
+    inputClasslist.add('error');
   } else if (pass.validity.tooShort || pass.value === '') {
     spanTxt.innerText = `Password must be ${pass.minLength} characters`;
     inputClasslist.add('error');
@@ -64,4 +71,17 @@ rPass.addEventListener('input', () => {
     spanTxt.innerText = "Passwords doesn't match";
     inputClasslist.add('error');
   }
-});
+};
+
+rPass.addEventListener('input', checkRPass);
+
+const submit = document.querySelector('input[type="submit"]');
+
+const checkForm = () => {
+  checkedInputs.forEach((i) => {
+    checkValidity(i);
+  });
+  checkRPass();
+};
+
+submit.addEventListener('click', checkForm);
