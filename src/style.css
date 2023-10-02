@@ -11,11 +11,21 @@ form {
   margin: 0 auto;
 }
 
-.errorInput {
+input:not(:placeholder-shown):invalid {
   border: 2px solid red;
   background-color: rgb(255, 220, 220);
 }
 
-.correctInput {
+.error {
+  border: 2px solid red;
+  background-color: rgb(255, 220, 220);
+}
+
+input:not([type="submit"]):valid {
   border: 2px solid rgb(5, 172, 5);
+}
+
+span {
+  font-size: 0.9em;
+  color: red;
 }
