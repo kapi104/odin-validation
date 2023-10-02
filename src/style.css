@@ -8,4 +8,14 @@ form {
   padding: 13px;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
+}
+
+.errorInput {
+  border: 2px solid red;
+  background-color: rgb(255, 220, 220);
+}
+
+.correctInput {
+  border: 2px solid rgb(5, 172, 5);
 }
