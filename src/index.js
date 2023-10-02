@@ -1,11 +1,5 @@
 import './style.css';
 
-// const email = document.querySelector('#email')
-// const country = document.querySelector('#country')
-// const zipCode = document.querySelector('#zipCode')
-// const pass = document.querySelector('#password')
-// const rPass = document.querySelector('#rPassword')
-
 const inputs = [...document.querySelectorAll('input')];
 
 const checkedInputs = inputs.slice(0, -2);
@@ -52,4 +46,22 @@ disabledValidationMessage.forEach((i) => {
   i.addEventListener('invalid', (e) => {
     e.preventDefault();
   });
+});
+
+const rPass = document.querySelector('#rPassword');
+const pass = document.querySelector('#password');
+
+rPass.addEventListener('input', () => {
+  const spanTxt = rPass.nextElementSibling;
+  const inputClasslist = rPass.classList;
+  if (rPass.value === pass.value && !pass.validity.tooShort) {
+    spanTxt.innerText = '';
+    inputClasslist.remove('error');
+  } else if (pass.validity.tooShort || pass.value === '') {
+    spanTxt.innerText = `Password must be ${pass.minLength} characters`;
+    inputClasslist.add('error');
+  } else if (rPass.value !== pass.value) {
+    spanTxt.innerText = "Passwords doesn't match";
+    inputClasslist.add('error');
+  }
 });

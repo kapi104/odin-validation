@@ -16,13 +16,13 @@ input:not(:placeholder-shown):invalid {
   background-color: rgb(255, 220, 220);
 }
 
+input:not([type='submit']):not(.error):valid {
+  border: 2px solid rgb(5, 172, 5);
+}
+
 .error {
   border: 2px solid red;
   background-color: rgb(255, 220, 220);
-}
-
-input:not([type='submit']):valid {
-  border: 2px solid rgb(5, 172, 5);
 }
 
 span {
